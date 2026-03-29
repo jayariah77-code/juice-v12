@@ -22,9 +22,6 @@
     </p>
     <br/>
 
-    <p align="center">
-    <img src="https://files.catbox.moe/qbcebp.jpg" width="220" style="border-radius:20px; box-shadow: 0 0 30px #25D366, 0 0 60px rgba(37,211,102,0.3);" alt="Juice v12" />
-  </p>
 
   <p align="center">
     <i>"Speed. Power. Intelligence — all in one bot."</i>
