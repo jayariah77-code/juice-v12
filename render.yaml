@@ -1,12 +1,12 @@
 services:
-  - type: web
+  - type: worker
     name: juice-v12
     runtime: node
     buildCommand: npm install --legacy-peer-deps
     startCommand: node index.js
     envVars:
       - key: OWNER_NUMBER
-        sync: false
+        value: 254753204154
       - key: SESSION_ID
         sync: false
       - key: SESSION_URL
