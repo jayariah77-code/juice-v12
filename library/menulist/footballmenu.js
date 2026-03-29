@@ -1,0 +1,60 @@
+const footballMenu = `
+╔══〔 ⚽ FOOTBALL SCORES 〕══╗
+
+║ .livescore
+║ .predictions
+║ .tips
+║ .fixtures
+║ .footnews
+
+╚═══════════════════════╝
+
+╔══〔 🏴󠁧󠁢󠁥󠁮󠁧󠁿 PREMIER LEAGUE 〕══╗
+
+║ .epl
+║ .eplscorers
+║ .eplmatches
+
+╚═══════════════════════╝
+
+╔═══〔 🇪🇸 LA LIGA 〕════╗
+
+║ .laliga
+║ .laligascorers
+║ .laligamatches
+
+╚═══════════════════════╝
+
+╔══〔 🏆 CHAMPIONS LEAGUE 〕══╗
+
+║ .ucl
+
+╚═══════════════════════╝
+
+╔══〔 🇩🇪 BUNDESLIGA 〕══╗
+
+║ .bundesliga
+║ .bundesligascorers
+
+╚═══════════════════════╝
+
+╔═══〔 🇮🇹 SERIE A 〕════╗
+
+║ .seriea
+
+╚═══════════════════════╝
+
+╔══〔 🏅 MULTI-SPORT 〕═══╗
+
+║ .sportscategories
+║ .livesports [cat]
+║ .allsports  [cat]
+║ .watchsport [id]
+
+║ 📋 football · basketball · tennis · cricket
+║    rugby · hockey · volleyball · boxing
+
+╚═══════════════════════╝
+`
+
+module.exports = footballMenu
