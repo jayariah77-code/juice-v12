@@ -1,0 +1,32 @@
+{
+  "name": "Juice v12",
+  "description": "Juice v12 WhatsApp Multi-Device Bot",
+  "repository": "https://github.com/Juicev12/TOOSII-XD-ULTRA",
+  "logo": "https://files.catbox.moe/qbcebp.jpg",
+  "keywords": ["whatsapp", "bot", "multi-device"],
+  "env": {
+    "OWNER_NUMBER": {
+      "description": "Your WhatsApp number with country code. No + or leading 0. Example: 254753204154",
+      "required": true
+    },
+    "SESSION_ID": {
+      "description": "Your TOOSII~ session ID from the session generator. Leave blank to use terminal pairing on first run.",
+      "required": false,
+      "value": ""
+    },
+    "SESSION_URL": {
+      "description": "URL of your session generator (optional). Shown in the bot connection message.",
+      "required": false,
+      "value": "https://juice-v12-session-generator.onrender.com/pair"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "buildpacks": [
+    { "url": "heroku/nodejs" }
+  ]
+}
