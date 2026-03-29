@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: toosii-xd-ultra
+    name: juice-v12
     runtime: node
     buildCommand: npm install --legacy-peer-deps
     startCommand: node index.js

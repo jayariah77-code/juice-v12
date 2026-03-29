@@ -8,7 +8,7 @@ Powered By Juice v12
 
 Contact
 WhatsApp : https://wa.me/254753204154
-Telegram : https://t.me/juicev12
+Telegram : https://t.me/jayariah77-code
 
 */
 
@@ -135,7 +135,7 @@ async function writeExifImg (media, metadata) {
 
     if (metadata.packname || metadata.author) {
         const img = new webp.Image()
-        const json = { "sticker-pack-id": `TOOSII-XD-ULTRA`, "sticker-pack-name": metadata.packname, "sticker-pack-publisher": metadata.author, "emojis": metadata.categories ? metadata.categories : [""] }
+        const json = { "sticker-pack-id": `juice-v12`, "sticker-pack-name": metadata.packname, "sticker-pack-publisher": metadata.author, "emojis": metadata.categories ? metadata.categories : [""] }
         const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00])
         const jsonBuff = Buffer.from(JSON.stringify(json), "utf-8")
         const exif = Buffer.concat([exifAttr, jsonBuff])
@@ -156,7 +156,7 @@ async function writeExifImgAV (media, metadata) {
 
     if (metadata.packname || metadata.author) {
         const img = new webp.Image()
-        const json = { "sticker-pack-id": `TOOSII-XD-ULTRA`, "sticker-pack-name": metadata.packname, "sticker-pack-publisher": metadata.author, "emojis": metadata.categories ? metadata.categories : [""] }
+        const json = { "sticker-pack-id": `juice-v12`, "sticker-pack-name": metadata.packname, "sticker-pack-publisher": metadata.author, "emojis": metadata.categories ? metadata.categories : [""] }
         const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00])
         const jsonBuff = Buffer.from(JSON.stringify(json), "utf-8")
         const exif = Buffer.concat([exifAttr, jsonBuff])
@@ -177,7 +177,7 @@ async function writeExifVid (media, metadata) {
 
     if (metadata.packname || metadata.author) {
         const img = new webp.Image()
-        const json = { "sticker-pack-id": `TOOSII-XD-ULTRA`, "sticker-pack-name": metadata.packname, "sticker-pack-publisher": metadata.author, "emojis": metadata.categories ? metadata.categories : [""] }
+        const json = { "sticker-pack-id": `juice-v12`, "sticker-pack-name": metadata.packname, "sticker-pack-publisher": metadata.author, "emojis": metadata.categories ? metadata.categories : [""] }
         const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00])
         const jsonBuff = Buffer.from(JSON.stringify(json), "utf-8")
         const exif = Buffer.concat([exifAttr, jsonBuff])
@@ -198,7 +198,7 @@ async function writeExif (media, metadata) {
 
     if (metadata.packname || metadata.author) {
         const img = new webp.Image()
-        const json = { "sticker-pack-id": `TOOSII-XD-ULTRA`, "sticker-pack-name": metadata.packname, "sticker-pack-publisher": metadata.author, "emojis": metadata.categories ? metadata.categories : [""] }
+        const json = { "sticker-pack-id": `juice-v12`, "sticker-pack-name": metadata.packname, "sticker-pack-publisher": metadata.author, "emojis": metadata.categories ? metadata.categories : [""] }
         const exifAttr = Buffer.from([0x49, 0x49, 0x2A, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00])
         const jsonBuff = Buffer.from(JSON.stringify(json), "utf-8")
         const exif = Buffer.concat([exifAttr, jsonBuff])

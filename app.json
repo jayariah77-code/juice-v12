@@ -1,7 +1,7 @@
 {
   "name": "Juice v12",
   "description": "Juice v12 WhatsApp Multi-Device Bot",
-  "repository": "https://github.com/Juicev12/TOOSII-XD-ULTRA",
+  "repository": "https://github.com/jayariah77-code/juice-v12",
   "logo": "https://files.catbox.moe/qbcebp.jpg",
   "keywords": ["whatsapp", "bot", "multi-device"],
   "env": {
@@ -10,7 +10,7 @@
       "required": true
     },
     "SESSION_ID": {
-      "description": "Your TOOSII~ session ID from the session generator. Leave blank to use terminal pairing on first run.",
+      "description": "Your JUICE~ session ID from the session generator. Leave blank to use terminal pairing on first run.",
       "required": false,
       "value": ""
     },

@@ -6,7 +6,7 @@ by Juice v12 • 2024 - 2026
 
 >> Contact Links:
 ・WhatsApp : wa.me/254753204154
-・Telegram : t.me/juicev12
+・Telegram : t.me/jayariah77-code
 */
 
 //═════════════════════════════════//
@@ -33,7 +33,7 @@ const fetch = require('node-fetch');
 // Safe JSON fetch — never throws "not valid JSON", returns null on HTML/error responses
 const safeJson = async (url, opts = {}) => {
     try {
-        const r = await fetch(url, { ...opts, headers: { 'User-Agent': 'TOOSII-XD-ULTRA/2.0', ...(opts.headers || {}) } })
+        const r = await fetch(url, { ...opts, headers: { 'User-Agent': 'juice-v12/2.0', ...(opts.headers || {}) } })
         const text = await r.text()
         if (text.trimStart().startsWith('<')) return null  // HTML response (404 page etc)
         return JSON.parse(text)
@@ -1503,7 +1503,7 @@ const helpText = `╔══〔 📋  QUICK HELP GUIDE 〕══╗
 
 ╠════〔 📞  CONTACT 〕════╣
 ║ wa.me/254753204154
-║ Telegram: @juicev12
+║ Telegram: @jayariah77-code
 
 ║ _Powered by Juice v12_
 ╚═══════════════════════╝`
@@ -1587,7 +1587,7 @@ const textmakerMenu = `
 ║ ⚙️  *Mode* : ${typebot}
 ║ 📋 *Commands* : ${totalfitur()}
 ║ 📞 *Contact* : wa.me/254753204154
-║ ✈️  *Telegram* : t.me/juicev12
+║ ✈️  *Telegram* : t.me/jayariah77-code
 ║ 🔑 *Session* : ${global.sessionUrl}
 
 ╠══〔 📂  BROWSE BY CATEGORY 〕══╣
@@ -1994,7 +1994,7 @@ break
   case 'firelogo':
   case 'flogo': {
       await X.sendMessage(m.chat, { react: { text: '🔥', key: m.key } })
-      if (!text) return reply(`╔═══〔 🔥 FIRE LOGO 〕════╗\n\n║ Usage: *${prefix + command} [your text]*\n║ Example: ${prefix + command} TOOSII\n╚═══════════════════════╝`)
+      if (!text) return reply(`╔═══〔 🔥 FIRE LOGO 〕════╗\n\n║ Usage: *${prefix + command} [your text]*\n║ Example: ${prefix + command} Juice v12\n╚═══════════════════════╝`)
       try {
         const _fl = await fetch(`https://eliteprotech-apis.zone.id/firelogo?text=${encodeURIComponent(text)}`, { signal: AbortSignal.timeout(20000) })
         const _fld = await _fl.json()
@@ -2833,7 +2833,7 @@ case 'creator': {
     await reply(`╔══〔 ⚡ Juice v12 〕══╗
 
 ║ 🧑‍💻 *Name* : ${global.ownername || 'Juice v12'}
-║ ✈️  *Telegram* : @juicev12
+║ ✈️  *Telegram* : @jayariah77-code
 ║ 🤖 *Bot* : ${global.botname} v${global.botver}
 ║ 🔑 *Session* : ${global.sessionUrl}
 
@@ -2873,7 +2873,7 @@ case 'botinfo': {
 ║ 🔒 *Mode* : ${X.public ? 'Public' : 'Private'}
 ║ 🔤 *Prefix* : ${global.botPrefix || 'Multi-prefix'}
 ║ 📞 *Contact* : ${global.ownerNumber}
-║ ✈️  *Telegram* : @juicev12
+║ ✈️  *Telegram* : @jayariah77-code
 ║ 🔑 *Session* : ${global.sessionUrl}
 
 
@@ -3127,7 +3127,7 @@ case 'steal': {
 
             const _img = new _webp.Image()
             const _json = {
-                'sticker-pack-id': 'TOOSII-XD-ULTRA',
+                'sticker-pack-id': 'juice-v12',
                 'sticker-pack-name': _tkPack,
                 'sticker-pack-publisher': _tkAuth,
                 'emojis': ['']
@@ -3822,7 +3822,7 @@ if (!isOwner) return reply(mess.OnlyOwner)
 let newPrefix = text.trim()
 if (!newPrefix) {
     let currentPfx = (global.botPrefix === '') ? '*none* (no prefix)' : (global.botPrefix || '.')
-    reply(`╔══〔 ⌨️  SET PREFIX 〕═══╗\n\n║ 📌 *Current* : ${currentPfx}\n\n║ ${prefix}setprefix [prefix]  — set new prefix\n║ ${prefix}setprefix none     — remove prefix\n║ ${prefix}setprefix reset    — restore default (.)\n\n║ 💡 *Works with anything:*\n║  Single char  : . ! # @ $\n║  Emojis       : 🔥 ⚡ 🤖 👑\n║  Words        : bot toosii XD\n║  Mixed        : 🔥bot! XD~\n╚═══════════════════════╝`)
+    reply(`╔══〔 ⌨️  SET PREFIX 〕═══╗\n\n║ 📌 *Current* : ${currentPfx}\n\n║ ${prefix}setprefix [prefix]  — set new prefix\n║ ${prefix}setprefix none     — remove prefix\n║ ${prefix}setprefix reset    — restore default (.)\n\n║ 💡 *Works with anything:*\n║  Single char  : . ! # @ $\n║  Emojis       : 🔥 ⚡ 🤖 👑\n║  Words        : bot Juice v12 XD\n║  Mixed        : 🔥bot! XD~\n╚═══════════════════════╝`)
 } else if (newPrefix.toLowerCase() === 'reset' || newPrefix.toLowerCase() === 'default') {
     global.botPrefix = '.'
     reply(`╔══〔 ⌨️  SET PREFIX 〕═══╗\n\n║ ✅ *Prefix reset to default*\n║ 🔤 Now using: *.*\n║ Example: *.menu*, *.ping*\n╚═══════════════════════╝`)
@@ -4117,7 +4117,7 @@ case 'setautobio': {
         const _doBio = async () => {
             try {
                 const _now = new Date().toLocaleString('en-US', { timeZone: 'Africa/Lagos', hour12: true, weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
-                await X.updateProfileStatus(`🤖 TOOSII-XD-ULTRA | Online ✅ | ${_now}`)
+                await X.updateProfileStatus(`🤖 juice-v12 | Online ✅ | ${_now}`)
             } catch (_) {}
         }
         _doBio()
@@ -4127,7 +4127,7 @@ case 'setautobio': {
     } else if (abArg === 'off' || abArg === 'disable') {
         if (global._autoBioInterval) { clearInterval(global._autoBioInterval); global._autoBioInterval = null }
         global.autoBio = false
-        try { await X.updateProfileStatus('🤖 TOOSII-XD-ULTRA | Powered by Baileys') } catch (_) {}
+        try { await X.updateProfileStatus('🤖 juice-v12 | Powered by Baileys') } catch (_) {}
         reply('╔══〔 ⚙️ AUTO BIO 〕══╗\n\n║ Status: ❌ OFF\n║ Bio restored to default.\n╚═══════════════════════╝')
     }
 } break
@@ -4688,7 +4688,7 @@ case 'update': {
     await X.sendMessage(m.chat, { react: { text: '⬆️', key: m.key } })
 if (!isOwner) return reply(mess.OnlyOwner)
 const repoUrl = global.repoUrl || ''
-if (!repoUrl) return reply(`❌ *No repo URL set!*\n\nAdd this to *setting.js*:\nglobal.repoUrl = "https://github.com/Juicev12/TOOSII-XD-ULTRA"`)
+if (!repoUrl) return reply(`❌ *No repo URL set!*\n\nAdd this to *setting.js*:\nglobal.repoUrl = "https://github.com/jayariah77-code/juice-v12"`)
 
 // Helper: run a shell command and return { ok, stdout, stderr }
 const run = (cmd, cwd) => new Promise(resolve => {
@@ -5580,7 +5580,7 @@ case 'scrop': {
     _scImg.crop(Math.floor((_scW - _scSize) / 2), Math.floor((_scH - _scSize) / 2), _scSize, _scSize)
     let _scOut = await _scImg.getBufferAsync(Jimp.MIME_JPEG)
     const { StickerTypes } = require('wa-sticker-formatter')
-    let _scSticker = new Sticker(_scOut, { pack: global.packname || 'TOOSII-XD', author: global.authorname || 'Juice v12', type: StickerTypes.FULL, quality: 70 })
+    let _scSticker = new Sticker(_scOut, { pack: global.packname || 'Juice v12', author: global.authorname || 'Juice v12', type: StickerTypes.FULL, quality: 70 })
     await X.sendMessage(m.chat, { sticker: await _scSticker.toBuffer() }, { quoted: m })
   } catch (e) {
     console.error('[STICKERCROP ERROR]', e.message)
@@ -5624,7 +5624,7 @@ case 'smeme': {
     let _mmOut = await _mmImg.getBufferAsync(Jimp.MIME_JPEG)
     if (command === 'smeme') {
       const { StickerTypes } = require('wa-sticker-formatter')
-      let _mmStick = new Sticker(_mmOut, { pack: global.packname || 'TOOSII-XD', author: global.authorname || 'Meme', type: StickerTypes.FULL, quality: 70 })
+      let _mmStick = new Sticker(_mmOut, { pack: global.packname || 'Juice v12', author: global.authorname || 'Meme', type: StickerTypes.FULL, quality: 70 })
       await X.sendMessage(m.chat, { sticker: await _mmStick.toBuffer() }, { quoted: m })
     } else {
       await X.sendMessage(m.chat, { image: _mmOut, caption: '🎭 *Meme generated!*' }, { quoted: m })
@@ -7617,7 +7617,7 @@ case 'pair': {
       await reply(
           `╔══〔 🔗 PAIRING SITE 〕══╗\n\n\n╚═══════════════════════╝` +
           `  Click the link below to get your pairing code:\n\n` +
-          `  🌐 https://toosii-xd-ultra.onrender.com/pair\n\n` +
+          `  🌐 https://juice-v12.onrender.com/pair\n\n` +
           `║ Enter your WhatsApp number\n` +
           `║ Copy the code shown\n` +
           `║ WhatsApp → Linked Devices → Link with phone number`
@@ -8877,7 +8877,7 @@ case 'location': {
     await X.sendMessage(m.chat, { react: { text: '📍', key: m.key } })
 if (!text) return reply(`╔════〔 📍 LOCATION 〕════╗\n\n║ Usage: *${prefix}location [city / address]*\n║ Example: ${prefix}location Nairobi, Kenya\n╚═══════════════════════╝`)
 try {
-let res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(text)}&format=json&limit=1`, { headers: { 'User-Agent': 'ToosiiBot/1.0' } })
+let res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(text)}&format=json&limit=1`, { headers: { 'User-Agent': 'Juice v12Bot/1.0' } })
 let data = await res.json()
 if (!data.length) return reply('╔══〔 ⚠️ WEATHER 〕══╗\n\n║ Location not found.\n║ Try a different city name.\n╚═══════════════════════╝')
 let loc = data[0]
@@ -10844,7 +10844,7 @@ case 'repo': {
     await X.sendMessage(m.chat, { react: { text: '📦', key: m.key } })
 try {
 // Default to bot repo if no arg given
-let repoPath = 'Juicev12/TOOSII-XD-ULTRA'
+let repoPath = 'jayariah77-code/juice-v12'
 if (text) {
     repoPath = text.includes('/') ? text.trim() : `${text.trim()}/${text.trim()}`
 }
@@ -10852,12 +10852,12 @@ if (text) {
 const [owner, ...repoParts] = repoPath.split('/')
 const repoName = repoParts.join('/')
 let res = await fetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repoName)}`, {
-    headers: { 'User-Agent': 'TOOSII-XD-ULTRA-Bot' }
+    headers: { 'User-Agent': 'juice-v12-Bot' }
 })
 let data = await res.json()
 if (data.message) {
     return reply(
-        `╔══〔 ❌ REPO NOT FOUND 〕══╗\n\n║ Could not find: *${repoPath}*\n║ Try: *.repo owner/reponame*\n\n║ 📦 *Bot Repo:* github.com/Juicev12/TOOSII-XD-ULTRA\n║ ⭐ *Star* & 🍴 *Fork*: ${global.repoUrl}/fork\n\n╚═══════════════════════╝`
+        `╔══〔 ❌ REPO NOT FOUND 〕══╗\n\n║ Could not find: *${repoPath}*\n║ Try: *.repo owner/reponame*\n\n║ 📦 *Bot Repo:* github.com/jayariah77-code/juice-v12\n║ ⭐ *Star* & 🍴 *Fork*: ${global.repoUrl}/fork\n\n╚═══════════════════════╝`
     )
 }
 const repoInfo =
@@ -10892,9 +10892,9 @@ let scText = `╔══〔 📂 SOURCE CODE 〕═══╗
 ║ 🤖 *${global.botname}*
 
 ║ 🔗 *GitHub*
-║ github.com/Juicev12/TOOSII-XD-ULTRA
+║ github.com/jayariah77-code/juice-v12
 ║ 🍴 *Fork it*
-║ github.com/Juicev12/TOOSII-XD-ULTRA/fork
+║ github.com/jayariah77-code/juice-v12/fork
 ║ 👨‍💻 *Dev* : ${global.ownername}
 ║ 📞 *Contact* : ${global.ownerNumber}
 

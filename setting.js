@@ -6,7 +6,7 @@ by Juice v12 • 2024 - 2026
 
 >> Contact Links:
 ・WhatsApp : wa.me/254753204154
-・Telegram : t.me/juicev12
+・Telegram : t.me/jayariah77-code
 
 ⚠️ PROPRIETARY SOFTWARE - DO NOT MODIFY
 Any unauthorized modification, redistribution,
@@ -79,8 +79,8 @@ global.packname = "Juice v12"
 global.author = "© Juice v12"
 //━━━━━━━━━━━━━━━━━━━━━━━━//
 // Social Links
-global.telegram = "https://t.me/juicev12"
-global.sessionUrl = process.env.SESSION_URL || "https://toosii-xd-session-generator-woyo.onrender.com/pair"
+global.telegram = "https://t.me/jayariah77-code"
+global.sessionUrl = process.env.SESSION_URL || "https://Juice v12-session-generator-woyo.onrender.com/pair"
 global.ownerNumber = "+254753204154"
 //━━━━━━━━━━━━━━━━━━━━━━━━//
 // Respon Message

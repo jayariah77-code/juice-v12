@@ -6,7 +6,7 @@
   <div align="center">
 
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=45&pause=1000&color=25D366&center=true&width=900&height=90&lines=TOOSII-XD+ULTRA;WhatsApp+Multi-Device+Bot;700%2B+Commands+%7C+37%2B+AI+Models;Built+For+Speed+%26+Power" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=45&pause=1000&color=25D366&center=true&width=900&height=90&lines=Juice v12+ULTRA;WhatsApp+Multi-Device+Bot;700%2B+Commands+%7C+37%2B+AI+Models;Built+For+Speed+%26+Power" alt="Typing SVG" />
   </a>
 
   <br/>
@@ -22,17 +22,17 @@
   <br/>
 
   <!-- Main Badges -->
-  [![Version](https://img.shields.io/badge/Version-2.1.0-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://github.com/Juicev12/TOOSII-XD-ULTRA)
+  [![Version](https://img.shields.io/badge/Version-2.1.0-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://github.com/jayariah77-code/juice-v12)
   [![Node](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
-  [![Stars](https://img.shields.io/github/stars/Juicev12/TOOSII-XD-ULTRA?style=for-the-badge&color=FFD700&logo=github&logoColor=white)](https://github.com/Juicev12/TOOSII-XD-ULTRA/stargazers)
-  [![Forks](https://img.shields.io/github/forks/Juicev12/TOOSII-XD-ULTRA?style=for-the-badge&color=25D366&logo=github&logoColor=white)](https://github.com/Juicev12/TOOSII-XD-ULTRA/fork)
-  [![Repo Size](https://img.shields.io/github/repo-size/Juicev12/TOOSII-XD-ULTRA?style=for-the-badge&color=128C7E&logo=github&logoColor=white)](https://github.com/Juicev12/TOOSII-XD-ULTRA)
+  [![Stars](https://img.shields.io/github/stars/jayariah77-code/juice-v12?style=for-the-badge&color=FFD700&logo=github&logoColor=white)](https://github.com/jayariah77-code/juice-v12/stargazers)
+  [![Forks](https://img.shields.io/github/forks/jayariah77-code/juice-v12?style=for-the-badge&color=25D366&logo=github&logoColor=white)](https://github.com/jayariah77-code/juice-v12/fork)
+  [![Repo Size](https://img.shields.io/github/repo-size/jayariah77-code/juice-v12?style=for-the-badge&color=128C7E&logo=github&logoColor=white)](https://github.com/jayariah77-code/juice-v12)
 
   <br/>
 
   <!-- Action Badges -->
   [![WhatsApp](https://img.shields.io/badge/WhatsApp-Contact_Owner-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/254753204154)
-  [![Telegram](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/juicev12)
+  [![Telegram](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/jayariah77-code)
   [![Community](https://img.shields.io/badge/WhatsApp-Join_Community-128C7E?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/CwNhH3QNvrVFdcKNgaKg4g)
 
   <br/><br/>
@@ -47,7 +47,7 @@
 
   **DOWNLOAD ZIP**
   <br/>
-  <a href="https://github.com/Juicev12/TOOSII-XD-ULTRA/archive/refs/heads/main.zip" target="_blank">
+  <a href="https://github.com/jayariah77-code/juice-v12/archive/refs/heads/main.zip" target="_blank">
     <img src="https://img.shields.io/badge/📦_DOWNLOAD_ZIP-Get_All_Bot_Files-100000?style=for-the-badge&labelColor=075E54&color=25D366" height="42" alt="Download ZIP"/>
   </a>
 
@@ -116,8 +116,8 @@
 
   ### 1. Clone the repository
   ```bash
-  git clone https://github.com/Juicev12/TOOSII-XD-ULTRA.git
-  cd TOOSII-XD-ULTRA
+  git clone https://github.com/jayariah77-code/juice-v12.git
+  cd juice-v12
   ```
 
   ### 2. Install dependencies
@@ -127,7 +127,7 @@
 
   ### 3. Configure
   ```env
-  SESSION_ID=TOOSII~eyJub2lzZUtleS...   # from Session Generator
+  SESSION_ID=Juice v12~eyJub2lzZUtleS...   # from Session Generator
   OWNER_NUMBER=254753204154              # your WhatsApp number (no + or spaces)
   ```
 
@@ -399,8 +399,8 @@
 
   <div align="center">
 
-  [![Star This Repo](https://img.shields.io/github/stars/Juicev12/TOOSII-XD-ULTRA?style=for-the-badge&color=FFD700&logo=github&logoColor=white&label=⭐%20Star%20This%20Repo)](https://github.com/Juicev12/TOOSII-XD-ULTRA/stargazers)
-  [![Fork This Repo](https://img.shields.io/github/forks/Juicev12/TOOSII-XD-ULTRA?style=for-the-badge&color=25D366&logo=github&logoColor=white&label=🍴%20Fork%20This%20Repo)](https://github.com/Juicev12/TOOSII-XD-ULTRA/fork)
+  [![Star This Repo](https://img.shields.io/github/stars/jayariah77-code/juice-v12?style=for-the-badge&color=FFD700&logo=github&logoColor=white&label=⭐%20Star%20This%20Repo)](https://github.com/jayariah77-code/juice-v12/stargazers)
+  [![Fork This Repo](https://img.shields.io/github/forks/jayariah77-code/juice-v12?style=for-the-badge&color=25D366&logo=github&logoColor=white&label=🍴%20Fork%20This%20Repo)](https://github.com/jayariah77-code/juice-v12/fork)
 
   </div>
 
@@ -411,7 +411,7 @@
   <div align="center">
 
   [![WhatsApp](https://img.shields.io/badge/WhatsApp-+254753204154-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/254753204154)
-  [![Telegram](https://img.shields.io/badge/Telegram-@juicev12-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/juicev12)
+  [![Telegram](https://img.shields.io/badge/Telegram-@jayariah77-code-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/jayariah77-code)
   [![Community](https://img.shields.io/badge/WhatsApp-Join_Community-128C7E?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/CwNhH3QNvrVFdcKNgaKg4g)
 
   </div>
@@ -426,7 +426,7 @@
 
   <div align="center">
 
-  Made with ❤️ by **TOOSII** &nbsp;•&nbsp; Powered by **gifted-baileys** &nbsp;•&nbsp; © 2024–2026
+  Made with ❤️ by **Juice v12** &nbsp;•&nbsp; Powered by **gifted-baileys** &nbsp;•&nbsp; © 2024–2026
 
   [![MIT License](https://img.shields.io/badge/License-MIT-25D366?style=flat-square)](LICENSE)
 

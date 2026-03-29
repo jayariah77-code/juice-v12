@@ -6,7 +6,7 @@ by Juice v12 • 2024 - 2026
 
 >> Contact Links:
 ・WhatsApp : wa.me/254753204154
-・Telegram : t.me/juicev12
+・Telegram : t.me/jayariah77-code
 */
 
 //═════════════════════════════════//

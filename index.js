@@ -6,7 +6,7 @@ by Juice v12 • 2024 - 2026
 
 >> Contact Links:
 ・WhatsApp : wa.me/254753204154
-・Telegram : t.me/juicev12
+・Telegram : t.me/jayariah77-code
 */
 
 //═════════════════════════════════//
@@ -862,7 +862,7 @@ try {
                           try { fs.unlinkSync(path.join(_sessionDir, i)); _wiped++ } catch {}
                       }
                   })
-                  if (_wiped) console.log(`[TOOSII-XD] Bad MAC: wiped ${_wiped} stale session file(s) for ${_sJid} — fresh session pending`)
+                  if (_wiped) console.log(`[Juice v12] Bad MAC: wiped ${_wiped} stale session file(s) for ${_sJid} — fresh session pending`)
               }
 
               // Clear from in-memory key store for both regular JID and @lid variant
@@ -877,7 +877,7 @@ try {
               if (_fJid && mek.key?.id && !_fJid.includes('broadcast')) {
                   try { await X.sendReceipt(_fJid, mek.key.participant || null, [mek.key.id], 'retry') } catch {}
               }
-          } catch (e) { console.log('[TOOSII-XD] Bad MAC recovery error:', e.message) }
+          } catch (e) { console.log('[Juice v12] Bad MAC recovery error:', e.message) }
           return
       }
 
