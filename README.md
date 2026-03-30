@@ -11,16 +11,15 @@
 
   <br/>
 
-
-    <!-- Owner Photo -->
-    <br/>
-    <p align="center">
-      <img src="https://raw.githubusercontent.com/jayariah77-code/juice-v12/main/images/juice-owner.jpg" width="420" style="border-radius:20px; box-shadow: 0 0 30px #25D366;" alt="Juice v12 Owner" />
-    </p>
-    <p align="center">
-      <b>🎤 Juice v12 — Owner</b>
-    </p>
-    <br/>
+<!-- Owner Photo -->
+<br/>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/jayariah77-code/juice-v12/main/images/juice-owner.jpg" width="420" style="border-radius:20px;" alt="Juice v12 Owner" />
+</p>
+<p align="center">
+  <b>🎤 Juice v12 — Owner</b>
+</p>
+<br/>
 
 
   <p align="center">
