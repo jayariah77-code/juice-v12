@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Juice v12 Panel</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#0d1117;color:#c9d1d9;min-height:100vh}
+:root{--green:#25D366;--green-dark:#128C7E;--bg:#0d1117;--card:#161b22;--border:#30363d}
+.sidebar{position:fixed;left:0;top:0;width:220px;height:100vh;background:#161b22;border-right:1px solid var(--border);display:flex;flex-direction:column;padding:20px 0;z-index:100}
+.logo{padding:0 20px 20px;border-bottom:1px solid var(--border);margin-bottom:10px}
+.logo h1{font-size:1.2rem;color:var(--green);font-weight:700}
+.logo span{font-size:.75rem;color:#8b949e}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 20px;cursor:pointer;color:#8b949e;font-size:.9rem;transition:.2s;text-decoration:none}
+.nav-item:hover,.nav-item.active{color:var(--green);background:rgba(37,211,102,.08)}
+.nav-item .icon{font-size:1.1rem;width:22px;text-align:center}
+.main{margin-left:220px;padding:28px;min-height:100vh}
+.page{display:none}.page.active{display:block}
+h2{font-size:1.4rem;font-weight:600;margin-bottom:20px;color:#e6edf3}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.status-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px}
+.dot-green{background:var(--green);box-shadow:0 0 8px var(--green)}
+.dot-red{background:#f85149}.dot-yellow{background:#e3b341}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center}
+.stat-val{font-size:1.8rem;font-weight:700;color:var(--green)}
+.stat-label{font-size:.8rem;color:#8b949e;margin-top:4px}
+button{background:var(--green);color:#000;border:none;border-radius:8px;padding:10px 20px;font-weight:600;cursor:pointer;font-size:.9rem;transition:.2s}
+button:hover{background:var(--green-dark);color:#fff}
+button.danger{background:#f85149;color:#fff}
+button.danger:hover{background:#da3633}
+button.outline{background:transparent;border:1px solid var(--green);color:var(--green)}
+button.outline:hover{background:var(--green);color:#000}
+button:disabled{opacity:.5;cursor:not-allowed}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap}
+input,select{background:#0d1117;border:1px solid var(--border);color:#c9d1d9;border-radius:8px;padding:9px 12px;font-size:.9rem;width:100%}
+input:focus,select:focus{outline:none;border-color:var(--green)}
+.form-group{margin-bottom:14px}
+label{display:block;font-size:.82rem;color:#8b949e;margin-bottom:6px}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
+.toggle-row:last-child{border-bottom:none}
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#30363d;border-radius:12px;cursor:pointer;transition:.3s}
+.slider:before{content:'';position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
+input:checked+.slider{background:var(--green)}
+input:checked+.slider:before{transform:translateX(20px)}
+.qr-box{text-align:center;padding:20px}
+.qr-box img{border-radius:12px;max-width:260px;border:4px solid var(--green)}
+.pair-code{font-size:2rem;font-weight:700;letter-spacing:8px;color:var(--green);font-family:monospace;text-align:center;padding:16px;background:#0d1117;border-radius:10px;border:2px dashed var(--green);margin:12px 0}
+.timer{text-align:center;color:#8b949e;font-size:.85rem}
+.timer span{color:var(--green);font-weight:600}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:600}
+.badge-green{background:rgba(37,211,102,.15);color:var(--green)}
+.badge-red{background:rgba(248,81,73,.15);color:#f85149}
+.badge-yellow{background:rgba(227,179,65,.15);color:#e3b341}
+.cmd-cat{margin-bottom:20px}
+.cmd-cat h3{color:var(--green);font-size:1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cmd-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.cmd-item{background:#0d1117;border:1px solid var(--border);border-radius:8px;padding:10px 14px}
+.cmd-name{font-family:monospace;color:#79c0ff;font-weight:600;font-size:.9rem}
+.cmd-desc{font-size:.8rem;color:#8b949e;margin-top:3px}
+.alert{padding:12px 16px;border-radius:8px;margin-bottom:14px;font-size:.88rem}
+.alert-success{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.3);color:var(--green)}
+.alert-error{background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.3);color:#f85149}
+.alert-info{background:rgba(56,139,253,.1);border:1px solid rgba(56,139,253,.3);color:#58a6ff}
+#toast{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast-msg{background:#161b22;border:1px solid var(--border);border-radius:8px;padding:12px 18px;font-size:.88rem;animation:slideIn .3s ease;max-width:320px}
+.toast-msg.success{border-color:var(--green);color:var(--green)}
+.toast-msg.error{border-color:#f85149;color:#f85149}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.loading{display:inline-block;width:16px;height:16px;border:2px solid rgba(37,211,102,.3);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:640px){.sidebar{width:60px}.sidebar .logo h1,.sidebar .logo span,.nav-item span{display:none}.main{margin-left:60px}.nav-item{justify-content:center}}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="logo">
+    <h1>🧃 Juice v12</h1>
+    <span>Control Panel</span>
+  </div>
+  <a class="nav-item active" onclick="showPage('dashboard')"><span class="icon">📊</span><span>Dashboard</span></a>
+  <a class="nav-item" onclick="showPage('config')"><span class="icon">⚙️</span><span>Configuration</span></a>
+  <a class="nav-item" onclick="showPage('commands')"><span class="icon">💬</span><span>Commands</span></a>
+  <a class="nav-item" onclick="showPage('about')"><span class="icon">ℹ️</span><span>About</span></a>
+</div>
+
+<div class="main">
+
+  <!-- DASHBOARD -->
+  <div class="page active" id="page-dashboard">
+    <h2>Dashboard</h2>
+
+    <div class="card" id="status-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div>
+          <span class="status-dot dot-red" id="dot"></span>
+          <strong id="conn-label">Disconnected</strong>
+          <span id="conn-phone" style="color:#8b949e;margin-left:10px;font-size:.88rem"></span>
+        </div>
+        <div class="btn-row">
+          <button onclick="showPage('dashboard');connectQR()" id="btn-qr">📷 QR Code</button>
+          <button class="outline" onclick="showPair()" id="btn-pair">📱 Pairing Code</button>
+          <button class="danger" onclick="doDisconnect()" id="btn-disc" style="display:none">Disconnect</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- QR Section -->
+    <div class="card" id="qr-section" style="display:none">
+      <h3 style="margin-bottom:14px">Scan QR Code</h3>
+      <div id="qr-loading" class="qr-box"><span class="loading"></span> Generating QR code...</div>
+      <div id="qr-img-box" class="qr-box" style="display:none">
+        <img id="qr-img" src="" alt="QR Code"/>
+        <p style="color:#8b949e;font-size:.82rem;margin-top:10px">Open WhatsApp → Linked Devices → Link a Device</p>
+      </div>
+    </div>
+
+    <!-- Pair Section -->
+    <div class="card" id="pair-section" style="display:none">
+      <h3 style="margin-bottom:14px">Link with Phone Number</h3>
+      <div class="form-group">
+        <label>Phone Number (with country code)</label>
+        <input type="tel" id="pair-phone" placeholder="254753204154" value="254753204154"/>
+      </div>
+      <button onclick="doPair()" id="btn-do-pair">Get Pairing Code</button>
+      <div id="pair-result" style="margin-top:16px;display:none">
+        <div class="pair-code" id="pair-code-display">----</div>
+        <div class="timer">Enter this code in WhatsApp → Linked Devices → Link with phone number &nbsp;|&nbsp; Expires in <span id="pair-timer">--</span></div>
+        <p style="color:#8b949e;font-size:.8rem;text-align:center;margin-top:8px">⚠️ Do NOT close this page until connected</p>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:16px">
+      <div class="stat-card"><div class="stat-val" id="stat-uptime">0s</div><div class="stat-label">Uptime</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-version">—</div><div class="stat-label">Version</div></div>
+      <div class="stat-card"><div class="stat-val" id="stat-mode">—</div><div class="stat-label">Mode</div></div>
+    </div>
+  </div>
+
+  <!-- CONFIGURATION -->
+  <div class="page" id="page-config">
+    <h2>Configuration</h2>
+    <div id="config-alert"></div>
+
+    <div class="card">
+      <h3 style="margin-bottom:14px;font-size:1rem">Bot Info</h3>
+      <div class="form-group"><label>Bot Name</label><input id="cfg-botName" type="text"/></div>
+      <div class="form-group"><label>Owner Number</label><input id="cfg-ownerNumber" type="tel"/></div>
+      <div class="form-group"><label>Command Prefix</label><input id="cfg-botPrefix" type="text" maxlength="3" style="width:80px"/></div>
+      <div class="form-group"><label>Timezone</label>
+        <select id="cfg-timezone">
+          <option value="Africa/Nairobi">Africa/Nairobi (EAT)</option>
+          <option value="Africa/Lagos">Africa/Lagos (WAT)</option>
+          <option value="Africa/Johannesburg">Africa/Johannesburg (SAST)</option>
+          <option value="UTC">UTC</option>
+          <option value="America/New_York">America/New_York</option>
+          <option value="Europe/London">Europe/London</option>
+          <option value="Asia/Kolkata">Asia/Kolkata</option>
+        </select>
+      </div>
+      <button onclick="saveSettings()">Save Changes</button>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:4px;font-size:1rem">Feature Toggles</h3>
+      <p style="color:#8b949e;font-size:.82rem;margin-bottom:14px">These settings sync to your bot configuration</p>
+      <div id="toggle-list"></div>
+    </div>
+  </div>
+
+  <!-- COMMANDS -->
+  <div class="page" id="page-commands">
+    <h2>Commands</h2>
+    <div id="cmd-container"></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="page" id="page-about">
+    <h2>About Juice v12</h2>
+    <div class="card" style="text-align:center">
+      <div style="font-size:3rem;margin-bottom:12px">🧃</div>
+      <h3 style="color:var(--green);font-size:1.4rem">Juice v12 ULTRA</h3>
+      <p style="color:#8b949e;margin:8px 0">WhatsApp Multi-Device Bot</p>
+      <div style="margin:16px 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <span class="badge badge-green">700+ Commands</span>
+        <span class="badge badge-green">37+ AI Models</span>
+        <span class="badge badge-green">Multi-Device</span>
+        <span class="badge badge-green">Gifted Baileys</span>
+      </div>
+      <p style="color:#8b949e;font-size:.9rem;font-style:italic">"Speed. Power. Intelligence — all in one bot."</p>
+    </div>
+    <div class="card">
+      <div class="toggle-row"><span>Owner</span><span style="color:var(--green)">+254753204154</span></div>
+      <div class="toggle-row"><span>GitHub</span><a href="https://github.com/jayariah77-code/juice-v12" target="_blank" style="color:#58a6ff">jayariah77-code/juice-v12</a></div>
+      <div class="toggle-row"><span>Baileys</span><span style="color:#8b949e">gifted-baileys (Gifted Tech)</span></div>
+      <div class="toggle-row"><span>Panel Version</span><span style="color:var(--green)">1.0.0</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast"></div>
+
+<script>
+const TOGGLES = [
+  {key:'welcome',label:'Welcome Messages',desc:'Greet new group members'},
+  {key:'antiLink',label:'Anti-Link',desc:'Remove invite links from groups'},
+  {key:'antiCall',label:'Anti-Call',desc:'Reject unwanted calls'},
+  {key:'autoRead',label:'Auto Read',desc:'Mark messages as read automatically'},
+  {key:'chatBot',label:'Chat Bot',desc:'Auto-reply AI chatbot'},
+  {key:'autoViewStatus',label:'Auto View Status',desc:'Automatically view contacts statuses'},
+  {key:'autoLikeStatus',label:'Auto Like Status',desc:'Like statuses automatically'},
+  {key:'autoReact',label:'Auto React',desc:'React to messages automatically'},
+  {key:'pmBlocker',label:'PM Blocker',desc:'Block unknown DMs'},
+  {key:'antiBadword',label:'Anti Badword',desc:'Filter offensive words'},
+  {key:'antiTag',label:'Anti Tag',desc:'Prevent mass tagging'},
+  {key:'antiDelete',label:'Anti Delete',desc:'Show deleted messages'},
+];
+const COMMANDS = [
+  {name:'AI & Chat',icon:'🤖',cmds:[{n:'.ai',d:'General AI'},{n:'.gpt4o',d:'GPT-4o'},{n:'.gemini',d:'Google Gemini'},{n:'.deepseek',d:'DeepSeek AI'},{n:'.mistral',d:'Mistral AI'},{n:'.grok',d:'Grok by xAI'},{n:'.vision',d:'AI image analysis'},{n:'.chatbot on/off',d:'Toggle chatbot'},{n:'.imagine',d:'Generate AI image'},{n:'.deepimg',d:'Flux model image'}]},
+  {name:'Downloaders',icon:'📥',cmds:[{n:'.play',d:'YouTube audio'},{n:'.ytv',d:'YouTube video'},{n:'.tt',d:'TikTok video'},{n:'.ig',d:'Instagram photo/reel'},{n:'.fb',d:'Facebook video'},{n:'.spotify',d:'Spotify track'},{n:'.pinterest',d:'Pinterest search'},{n:'.mediafire',d:'MediaFire file'}]},
+  {name:'Stickers & Art',icon:'🖼️',cmds:[{n:'.sticker/.s',d:'Convert to sticker'},{n:'.take',d:'Re-pack sticker'},{n:'.attp',d:'Animated text sticker'},{n:'.emojimix',d:'Mix two emojis'},{n:'.brat',d:'BRAT-style image'},{n:'.removebg',d:'Remove background'},{n:'.neontext',d:'Neon text art'},{n:'.lavatext',d:'Lava text art'}]},
+  {name:'Group Tools',icon:'👥',cmds:[{n:'.add',d:'Add member'},{n:'.kick',d:'Remove member'},{n:'.promote',d:'Promote to admin'},{n:'.demote',d:'Demote admin'},{n:'.warn',d:'Warn a member'},{n:'.antilink on/off',d:'Block invite links'},{n:'.welcome on/off',d:'Toggle welcome'},{n:'.everyone',d:'Tag all members'}]},
+  {name:'Games',icon:'🎮',cmds:[{n:'.truth/.dare',d:'Truth or Dare'},{n:'.8ball',d:'Magic 8-Ball'},{n:'.ttt',d:'Tic-Tac-Toe'},{n:'.trivia',d:'Trivia question'},{n:'.hangman',d:'Hangman game'},{n:'.rps',d:'Rock Paper Scissors'},{n:'.coinflip',d:'Flip a coin'},{n:'.roll',d:'Roll dice'}]},
+  {name:'Tools & Search',icon:'🛠️',cmds:[{n:'.tr',d:'Translate text'},{n:'.weather',d:'Weather report'},{n:'.wikipedia',d:'Wikipedia summary'},{n:'.google',d:'Google search'},{n:'.qr',d:'Generate QR code'},{n:'.screenshot',d:'Website screenshot'},{n:'.tts',d:'Text to speech'},{n:'.calc',d:'Calculator'}]},
+  {name:'Football',icon:'⚽',cmds:[{n:'.epl',d:'EPL standings'},{n:'.laliga',d:'La Liga standings'},{n:'.ucl',d:'Champions League'},{n:'.livescore',d:'Live scores'},{n:'.predict',d:'Match predictions'},{n:'.epltopscorers',d:'Top scorers'},{n:'.footnews',d:'Football news'}]},
+  {name:'Owner Tools',icon:'🔐',cmds:[{n:'.setprefix',d:'Change prefix'},{n:'.broadcast',d:'Broadcast message'},{n:'.block/.unblock',d:'Block or unblock'},{n:'.setbio',d:'Update bio'},{n:'.restart',d:'Restart bot'},{n:'.ping',d:'Bot speed'},{n:'.botinfo',d:'Bot info card'},{n:'.repo',d:'GitHub repo link'}]},
+];
+
+let settings = {};
+let pairInterval = null;
+let statusInterval = null;
+let qrPollInterval = null;
+
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('page-' + p).classList.add('active');
+  event && event.currentTarget && event.currentTarget.classList.add('active');
+  if (p === 'config') loadSettings();
+  if (p === 'commands') loadCommands();
+}
+
+function toast(msg, type = 'success') {
+  const t = document.createElement('div');
+  t.className = 'toast-msg ' + type;
+  t.textContent = msg;
+  document.getElementById('toast').appendChild(t);
+  setTimeout(() => t.remove(), 3500);
+}
+
+function fmt(s) {
+  if (s < 60) return s + 's';
+  if (s < 3600) return Math.floor(s/60) + 'm ' + (s%60) + 's';
+  return Math.floor(s/3600) + 'h ' + Math.floor((s%3600)/60) + 'm';
+}
+
+async function fetchStatus() {
+  try {
+    const r = await fetch('/api/bot/status');
+    const d = await r.json();
+    const dot = document.getElementById('dot');
+    const label = document.getElementById('conn-label');
+    const phone = document.getElementById('conn-phone');
+    const disc = document.getElementById('btn-disc');
+    const qrBtn = document.getElementById('btn-qr');
+    const pairBtn = document.getElementById('btn-pair');
+    if (d.connected) {
+      dot.className = 'status-dot dot-green';
+      label.textContent = 'Connected';
+      phone.textContent = '+' + (d.phone || '');
+      disc.style.display = 'inline-block';
+      qrBtn.style.display = 'none';
+      pairBtn.style.display = 'none';
+      document.getElementById('qr-section').style.display = 'none';
+      document.getElementById('pair-section').style.display = 'none';
+      clearInterval(qrPollInterval); qrPollInterval = null;
+    } else {
+      dot.className = 'status-dot dot-' + (d.mode !== 'idle' ? 'yellow' : 'red');
+      label.textContent = d.mode !== 'idle' ? 'Connecting...' : 'Disconnected';
+      phone.textContent = '';
+      disc.style.display = 'none';
+      qrBtn.style.display = 'inline-block';
+      pairBtn.style.display = 'inline-block';
+    }
+    document.getElementById('stat-uptime').textContent = fmt(d.uptime || 0);
+    document.getElementById('stat-version').textContent = d.version || '—';
+    document.getElementById('stat-mode').textContent = d.mode || 'idle';
+  } catch {}
+}
+
+async function connectQR() {
+  document.getElementById('qr-section').style.display = 'block';
+  document.getElementById('pair-section').style.display = 'none';
+  document.getElementById('qr-loading').style.display = 'block';
+  document.getElementById('qr-img-box').style.display = 'none';
+  try {
+    const r = await fetch('/api/bot/qr', { method: 'POST' });
+    const d = await r.json();
+    if (d.alreadyLinked) { toast('Already linked!'); return; }
+    if (d.qrImage) showQR(d.qrImage);
+    if (!qrPollInterval) {
+      qrPollInterval = setInterval(async () => {
+        try {
+          const r2 = await fetch('/api/bot/qr-image');
+          if (r2.status === 200) { const d2 = await r2.json(); if (d2.qrImage) showQR(d2.qrImage); }
+        } catch {}
+      }, 5000);
+    }
+  } catch (e) { toast('QR failed: ' + e.message, 'error'); }
+}
+
+function showQR(img) {
+  document.getElementById('qr-loading').style.display = 'none';
+  document.getElementById('qr-img-box').style.display = 'block';
+  document.getElementById('qr-img').src = img;
+}
+
+function showPair() {
+  document.getElementById('pair-section').style.display = 'block';
+  document.getElementById('qr-section').style.display = 'none';
+  document.getElementById('pair-result').style.display = 'none';
+}
+
+async function doPair() {
+  const phone = document.getElementById('pair-phone').value.replace(/[^0-9]/g, '');
+  if (!phone) { toast('Enter your phone number', 'error'); return; }
+  const btn = document.getElementById('btn-do-pair');
+  btn.disabled = true; btn.textContent = 'Requesting...';
+  try {
+    const r = await fetch('/api/bot/pair', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ phone }) });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+    document.getElementById('pair-code-display').textContent = d.code;
+    document.getElementById('pair-result').style.display = 'block';
+    startPairTimer(160);
+    toast('Code generated! Enter it in WhatsApp now.');
+  } catch (e) { toast('Error: ' + e.message, 'error'); }
+  btn.disabled = false; btn.textContent = 'Get Pairing Code';
+}
+
+function startPairTimer(secs) {
+  clearInterval(pairInterval);
+  let rem = secs;
+  const el = document.getElementById('pair-timer');
+  pairInterval = setInterval(() => {
+    rem--;
+    el.textContent = rem + 's';
+    if (rem <= 0) { clearInterval(pairInterval); el.textContent = 'Expired'; toast('Code expired. Request a new one.', 'error'); }
+  }, 1000);
+}
+
+async function doDisconnect() {
+  if (!confirm('Disconnect WhatsApp?')) return;
+  await fetch('/api/bot/disconnect', { method: 'POST' });
+  toast('Disconnected');
+  clearInterval(qrPollInterval); qrPollInterval = null;
+  clearInterval(pairInterval);
+  document.getElementById('btn-qr').style.display = 'inline-block';
+  document.getElementById('btn-pair').style.display = 'inline-block';
+  document.getElementById('btn-disc').style.display = 'none';
+  document.getElementById('qr-section').style.display = 'none';
+  document.getElementById('pair-section').style.display = 'none';
+}
+
+async function loadSettings() {
+  try {
+    const r = await fetch('/api/bot/settings');
+    settings = await r.json();
+    document.getElementById('cfg-botName').value = settings.botName || '';
+    document.getElementById('cfg-ownerNumber').value = settings.ownerNumber || '';
+    document.getElementById('cfg-botPrefix').value = settings.botPrefix || '.';
+    document.getElementById('cfg-timezone').value = settings.timezone || 'Africa/Nairobi';
+    renderToggles();
+  } catch {}
+}
+
+function renderToggles() {
+  const cont = document.getElementById('toggle-list');
+  cont.innerHTML = TOGGLES.map(t => `
+    <div class="toggle-row">
+      <div><div style="font-size:.9rem">${t.label}</div><div style="font-size:.78rem;color:#8b949e">${t.desc}</div></div>
+      <label class="toggle">
+        <input type="checkbox" id="tog-${t.key}" ${settings[t.key] ? 'checked' : ''} onchange="toggleFeature('${t.key}', this.checked)"/>
+        <span class="slider"></span>
+      </label>
+    </div>`).join('');
+}
+
+async function toggleFeature(key, val) {
+  try {
+    const r = await fetch('/api/bot/settings', { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ [key]: val ? 1 : 0 }) });
+    settings = await r.json();
+    toast((val ? 'Enabled' : 'Disabled') + ' ' + TOGGLES.find(t=>t.key===key)?.label);
+  } catch { toast('Failed to update', 'error'); }
+}
+
+async function saveSettings() {
+  const payload = {
+    botName: document.getElementById('cfg-botName').value,
+    ownerNumber: document.getElementById('cfg-ownerNumber').value,
+    botPrefix: document.getElementById('cfg-botPrefix').value,
+    timezone: document.getElementById('cfg-timezone').value,
+  };
+  try {
+    const r = await fetch('/api/bot/settings', { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    settings = await r.json();
+    toast('Settings saved ✓');
+  } catch { toast('Failed to save', 'error'); }
+}
+
+function loadCommands() {
+  const cont = document.getElementById('cmd-container');
+  cont.innerHTML = COMMANDS.map(cat => `
+    <div class="cmd-cat">
+      <h3>${cat.icon} ${cat.name}</h3>
+      <div class="cmd-list">
+        ${cat.cmds.map(c => `<div class="cmd-item"><div class="cmd-name">${c.n}</div><div class="cmd-desc">${c.d}</div></div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+// Start polling
+fetchStatus();
+statusInterval = setInterval(fetchStatus, 5000);
+</script>
+</body>
+</html>
