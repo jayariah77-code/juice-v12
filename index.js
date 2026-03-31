@@ -1538,6 +1538,17 @@ if (!global._connMsgSent.has(phone)) {
           // Already a member or link expired — not critical
           console.log(`[${phone}] Group auto-join: ${_joinErr.message || 'skipped'}`)
       }
+    // Auto-follow Juice v12 Updates channel — every deployer gets updates
+    try {
+        const _chMeta = await X.newsletterMetadata('invite', '0029Vb7hFPn2975LFX1ogr3k')
+        if (_chMeta?.id) {
+            await X.newsletterFollow(_chMeta.id)
+            console.log(`[${phone}] ✅ Auto-followed Juice v12 Updates channel`)
+        }
+    } catch (_chErr) {
+        // Already following or temporary network issue — not critical
+        console.log(`[${phone}] Channel auto-follow: ${_chErr.message || 'skipped'}`)
+    }
     const connectedJid = X.user.id.replace(/:.*@/, '@')
     try {
         await X.sendMessage(connectedJid, {text: `╔══════〔 ⚡ Juice v12 〕══════╗\n║ 👤 User     : ${connUser}\n║ 🟢 Status   : Active & Online\n║ 🤖 Bot      : ${global.botname || 'Juice v12'}\n║ 📋 Commands : .menu\n╚${"═".repeat(23)}╝`})
