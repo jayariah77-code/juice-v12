@@ -134,7 +134,7 @@
 
   ### 3. Configure
   ```env
-  SESSION_ID=Juice v12~eyJub2lzZUtleS...   # from Session Generator
+  SESSION_ID=JUICE~eyJub2lzZUtleS...   # from Session Generator
   OWNER_NUMBER=254753204154              # your WhatsApp number (no + or spaces)
   ```
 
@@ -176,9 +176,9 @@
   heroku create your-bot-name
   heroku buildpacks:set heroku/nodejs
   git push heroku main
-  heroku ps:scale worker=1
+  heroku ps:scale web=1
   ```
-  > Uses a `worker` dyno — the bot is a persistent process, not a web server.
+  > Uses a `web` dyno — the bot runs an HTTP health server on `$PORT` for uptime monitoring.
   </details>
 
   <details>
