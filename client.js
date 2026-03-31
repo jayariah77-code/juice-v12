@@ -2114,7 +2114,6 @@ break
       }
   } break
 
-  case 'tt':  
 case 'tt':
 case 'tiktok': {
     await X.sendMessage(m.chat, { react: { text: '🎵', key: m.key } })
@@ -8937,7 +8936,8 @@ try {
 } catch(e) { reply(`❌ *toimage failed:* ${e.message}`) }
 } break
 
-case 'totext': {
+case 'ocr':
+case 'readtext': {
     await X.sendMessage(m.chat, { react: { text: '📝', key: m.key } })
 // Extract text from an image using OCR via pollinations vision API
 if (!m.quoted || !/image/.test(m.quoted.mimetype || m.quoted.msg?.mimetype || '')) {
