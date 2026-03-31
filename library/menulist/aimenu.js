@@ -57,7 +57,7 @@ const aiMenu = `
 
 ║ .vision
 ║ .analyse
-║ .totext
+║ .ocr / .readtext
 ║ .speechwrite
 ║ .imagine
 ║ .flux
