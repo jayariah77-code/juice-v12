@@ -1,7 +1,6 @@
 [build]
-  builder = "nixpacks"
+builder = "nixpacks"
 
-  [deploy]
-  startCommand = "node index.js"
-  restartPolicyType = "always"
-  
+[deploy]
+startCommand = "node index.js"
+restartPolicyType = "always"
