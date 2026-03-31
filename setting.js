@@ -80,7 +80,7 @@ global.author = "© Juice v12"
 //━━━━━━━━━━━━━━━━━━━━━━━━//
 // Social Links
 global.telegram = "https://t.me/jayariah77-code"
-global.sessionUrl = process.env.SESSION_URL || "https://Juice v12-session-generator-woyo.onrender.com/pair"
+global.sessionUrl = process.env.SESSION_URL || "https://juice-v12-session-generator.onrender.com/pair"
 global.ownerNumber = "+254753204154"
 //━━━━━━━━━━━━━━━━━━━━━━━━//
 // Respon Message
