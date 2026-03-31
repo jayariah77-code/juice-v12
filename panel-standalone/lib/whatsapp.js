@@ -1,5 +1,7 @@
-const makeWASocket = require('gifted-baileys').default;
+'use strict';
+
 const {
+  default: makeWASocket,
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
@@ -8,145 +10,186 @@ const {
 } = require('gifted-baileys');
 const { Boom } = require('@hapi/boom');
 const QRCode = require('qrcode');
+const pino = require('pino');
 const path = require('path');
 const fs = require('fs');
 
-const SESSION_DIR = path.join(__dirname, '..', 'data', '.wa-session');
-const MAX_RECONNECT = 10;
+const SESSION_DIR = path.join(__dirname, '..', 'data', 'session');
+const MAX_RETRIES = 15;
+const RETRY_DELAY = 4000;
 
-let sock = null;
-let connState = { connection: 'close' };
-let linkedPhone = null;
-let currentQRImage = null;
-let pairingCode = null;
-let pairingCodeExpiry = null;
-let mode = 'idle';
-let reconnectAttempts = 0;
-let reconnectTimer = null;
-let targetPhone = null;
+// Silent logger — keeps console clean
+const logger = pino({ level: 'silent' });
 
+// ─── State ────────────────────────────────────────────────────
+let sock            = null;
+let state           = { connection: 'close' };
+let linkedPhone     = null;
+let qrImageBase64   = null;   // base64 data URL shown in browser
+let pairingCode     = null;
+let pairingExpiry   = null;
+let mode            = 'idle'; // 'idle' | 'qr' | 'pair'
+let retryCount      = 0;
+let retryTimer      = null;
+let phoneForRetry   = null;
+
+// ─── Public getters ───────────────────────────────────────────
 function getStatus() {
+  const codeValid = pairingCode && pairingExpiry && Date.now() < pairingExpiry;
   return {
-    connected: connState.connection === 'open',
-    connection: connState.connection || 'close',
-    phone: linkedPhone,
+    connected:        state.connection === 'open',
+    connection:       state.connection || 'close',
+    phone:            linkedPhone,
     mode,
-    pairingCode: pairingCodeExpiry && Date.now() < pairingCodeExpiry ? pairingCode : null,
-    pairingCodeExpiry,
-    hasQR: !!currentQRImage,
-    reconnectAttempts,
+    pairingCode:      codeValid ? pairingCode : null,
+    pairingExpiry:    codeValid ? pairingExpiry : null,
+    hasQR:            !!qrImageBase64,
+    retries:          retryCount,
   };
 }
+function getQR() { return qrImageBase64; }
 
-function getQRImage() { return currentQRImage; }
+// ─── Internal helpers ─────────────────────────────────────────
+function ensureSessionDir() {
+  if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
+}
 
 function wipeSession() {
   try {
     if (fs.existsSync(SESSION_DIR)) fs.rmSync(SESSION_DIR, { recursive: true, force: true });
-    fs.mkdirSync(SESSION_DIR, { recursive: true });
   } catch {}
+  ensureSessionDir();
 }
 
-function endSocket() {
-  if (sock) {
-    try { sock.end(new Error('closed')); } catch {}
-    try { if (sock.ws) sock.ws.close(); } catch {}
-    sock = null;
-  }
+function killSocket() {
+  if (!sock) return;
+  try { sock.end(undefined); } catch {}
+  try { sock.ws && sock.ws.close(); } catch {}
+  sock = null;
 }
 
-function clearTimer() {
-  if (reconnectTimer) { clearTimeout(reconnectTimer); reconnectTimer = null; }
+function stopRetry() {
+  if (retryTimer) { clearTimeout(retryTimer); retryTimer = null; }
 }
 
-function reset() {
-  clearTimer();
-  endSocket();
-  wipeSession();
-  connState = { connection: 'close' };
-  currentQRImage = null;
-  pairingCode = null;
-  pairingCodeExpiry = null;
-  mode = 'idle';
-  reconnectAttempts = 0;
-  targetPhone = null;
+function fullReset() {
+  stopRetry();
+  killSocket();
+  state         = { connection: 'close' };
+  qrImageBase64 = null;
+  pairingCode   = null;
+  pairingExpiry = null;
+  mode          = 'idle';
+  retryCount    = 0;
+  phoneForRetry = null;
 }
 
-async function createSocket() {
-  if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
-  const { state, saveCreds } = await useMultiFileAuthState(SESSION_DIR);
+// ─── Socket factory ───────────────────────────────────────────
+async function buildSocket() {
+  ensureSessionDir();
+  const { state: authState, saveCreds } = await useMultiFileAuthState(SESSION_DIR);
 
+  // Fetch latest WA version — fall back gracefully
   let version;
-  try { version = (await fetchLatestBaileysVersion()).version; }
-  catch { version = [2, 3000, 1023247704]; }
+  try {
+    const v = await fetchLatestBaileysVersion();
+    version = v.version;
+    console.log(`[WA] Using WhatsApp version: ${version.join('.')}`);
+  } catch {
+    version = [2, 3000, 1023247704];
+    console.log(`[WA] Using fallback version: ${version.join('.')}`);
+  }
 
   const s = makeWASocket({
     version,
     auth: {
-      creds: state.creds,
-      keys: makeCacheableSignalKeyStore(state.keys, console),
+      creds: authState.creds,
+      keys: makeCacheableSignalKeyStore(authState.keys, logger),
     },
-    printQRInTerminal: false,
-    browser: Browsers.macOS('Desktop'),
-    keepAliveIntervalMs: 30000,
-    connectTimeoutMs: 60000,
-    defaultQueryTimeoutMs: 60000,
-    syncFullHistory: false,
-    markOnlineOnConnect: true,
+    // ── Key settings for WhatsApp to accept the connection ──
+    browser:              Browsers.macOS('Desktop'),
+    printQRInTerminal:    false,
+    logger,
+    // ── Stability settings ──────────────────────────────────
+    keepAliveIntervalMs:  25_000,
+    connectTimeoutMs:     60_000,
+    defaultQueryTimeoutMs: 60_000,
+    qrTimeout:            60_000,
+    retryRequestDelayMs:  2_000,
+    maxMsgRetryCount:     5,
+    // ── Optional features ───────────────────────────────────
+    syncFullHistory:              false,
+    markOnlineOnConnect:          true,
     generateHighQualityLinkPreview: false,
+    emitOwnEvents:                true,
   });
 
   s.ev.on('creds.update', saveCreds);
 
   s.ev.on('connection.update', async (update) => {
     const { connection, lastDisconnect, qr } = update;
-    connState = { ...connState, ...update };
+    state = { ...state, ...update };
 
+    // QR code generated by WhatsApp
     if (qr && mode === 'qr') {
+      console.log('[WA] QR received — converting to image');
       try {
-        currentQRImage = await QRCode.toDataURL(qr, { width: 320, margin: 2 });
-        console.log('[WA] QR code generated ✓');
-      } catch (e) { console.error('[WA] QR error:', e.message); }
+        qrImageBase64 = await QRCode.toDataURL(qr, { width: 320, margin: 2 });
+        console.log('[WA] QR image ready ✓');
+      } catch (err) {
+        console.error('[WA] QR image error:', err.message);
+      }
     }
 
     if (connection === 'open') {
-      reconnectAttempts = 0;
-      clearTimer();
-      currentQRImage = null;
-      pairingCode = null;
-      linkedPhone = s.user?.id?.split(':')[0] || linkedPhone || null;
-      console.log('[WA] Connected ✓ Phone:', linkedPhone);
+      console.log('[WA] ✅ Connected to WhatsApp!');
+      retryCount    = 0;
+      stopRetry();
+      qrImageBase64 = null;
+      pairingCode   = null;
+      pairingExpiry = null;
+      // Extract phone number from JID
+      const jid = s.user?.id || '';
+      linkedPhone   = jid.split(':')[0].split('@')[0] || linkedPhone || null;
+      console.log('[WA] Linked phone:', linkedPhone);
     }
 
     if (connection === 'close') {
-      const code = new Boom(lastDisconnect?.error)?.output?.statusCode;
-      console.log('[WA] Disconnected. Code:', code);
+      const boom      = lastDisconnect?.error instanceof Boom ? lastDisconnect.error : null;
+      const statusCode = boom?.output?.statusCode;
+      console.log('[WA] Connection closed. Status code:', statusCode);
 
+      // Unrecoverable — wipe session and stop
       if (
-        code === DisconnectReason.loggedOut ||
-        code === DisconnectReason.connectionReplaced ||
-        code === DisconnectReason.badSession
+        statusCode === DisconnectReason.loggedOut ||
+        statusCode === DisconnectReason.badSession ||
+        statusCode === DisconnectReason.connectionReplaced
       ) {
-        console.log('[WA] Session invalidated — wiping');
-        reset(); linkedPhone = null;
+        console.log('[WA] Session invalidated — wiping and resetting');
+        wipeSession();
+        fullReset();
+        linkedPhone = null;
         return;
       }
 
-      if (mode !== 'idle' && reconnectAttempts < MAX_RECONNECT) {
-        reconnectAttempts++;
-        const delay = 3000 * Math.min(reconnectAttempts, 5);
-        console.log(`[WA] Reconnecting in ${delay}ms (attempt ${reconnectAttempts})`);
-        clearTimer();
-        reconnectTimer = setTimeout(async () => {
+      // Recoverable — schedule a reconnect
+      if (mode !== 'idle' && retryCount < MAX_RETRIES) {
+        retryCount++;
+        const delay = Math.min(RETRY_DELAY * retryCount, 30_000);
+        console.log(`[WA] Reconnecting in ${delay}ms (attempt ${retryCount}/${MAX_RETRIES})`);
+        stopRetry();
+        retryTimer = setTimeout(async () => {
           try {
-            endSocket();
-            if (mode === 'qr') await _connectQR();
-            else if (mode === 'pair' && targetPhone) await _connectPair(targetPhone);
-          } catch (e) { console.error('[WA] Reconnect failed:', e.message); }
+            killSocket();
+            if (mode === 'qr')   await _buildQR();
+            if (mode === 'pair' && phoneForRetry) await _buildPair(phoneForRetry);
+          } catch (err) {
+            console.error('[WA] Reconnect error:', err.message);
+          }
         }, delay);
-      } else if (reconnectAttempts >= MAX_RECONNECT) {
-        console.error('[WA] Max reconnects reached');
-        reset();
+      } else if (retryCount >= MAX_RETRIES) {
+        console.error('[WA] Max retries reached — giving up');
+        fullReset();
       }
     }
   });
@@ -154,46 +197,114 @@ async function createSocket() {
   return s;
 }
 
-async function _connectQR() {
-  sock = await createSocket();
-}
-
-async function _connectPair(phone) {
-  sock = await createSocket();
-  await new Promise(r => setTimeout(r, 2500));
-  if (sock.authState.creds.registered) { console.log('[WA] Already registered'); return 'already-linked'; }
-  const clean = phone.replace(/[^0-9]/g, '');
-  const code = await sock.requestPairingCode(clean);
-  pairingCode = code;
-  pairingCodeExpiry = Date.now() + 160000;
-  console.log('[WA] Pairing code:', code);
-  return code;
+// ─── QR flow ──────────────────────────────────────────────────
+async function _buildQR() {
+  sock = await buildSocket();
 }
 
 async function startQRLogin() {
-  reset(); mode = 'qr';
+  wipeSession();
+  fullReset();
+  mode = 'qr';
+
   return new Promise(async (resolve, reject) => {
-    let done = false;
-    const interval = setInterval(() => {
-      if (currentQRImage && !done) { done = true; clearInterval(interval); resolve(currentQRImage); }
-    }, 300);
+    let settled = false;
+
+    // Poll for QR image
+    const poll = setInterval(() => {
+      if (qrImageBase64 && !settled) {
+        settled = true;
+        clearInterval(poll);
+        resolve(qrImageBase64);
+      }
+    }, 200);
+
     try {
-      await _connectQR();
-      if (sock?.authState?.creds?.registered) { done = true; clearInterval(interval); mode = 'idle'; resolve('already-linked'); return; }
-      setTimeout(() => { clearInterval(interval); if (!done) { done = true; currentQRImage ? resolve(currentQRImage) : reject(new Error('QR timeout. Try again.')); } }, 20000);
-    } catch (e) { clearInterval(interval); reject(e); }
+      await _buildQR();
+
+      // Already registered (existing session)
+      if (sock?.authState?.creds?.registered) {
+        settled = true;
+        clearInterval(poll);
+        mode = 'idle';
+        resolve('already-linked');
+        return;
+      }
+
+      // Timeout after 25s
+      setTimeout(() => {
+        clearInterval(poll);
+        if (!settled) {
+          settled = true;
+          qrImageBase64
+            ? resolve(qrImageBase64)
+            : reject(new Error('QR timed out — try again'));
+        }
+      }, 25_000);
+    } catch (err) {
+      clearInterval(poll);
+      if (!settled) reject(err);
+    }
   });
 }
 
+// ─── Pairing code flow ────────────────────────────────────────
+async function _buildPair(phone) {
+  sock = await buildSocket();
+
+  // Wait for the WS to open before requesting the code
+  await new Promise((resolve, reject) => {
+    // Already registered
+    if (sock.authState.creds.registered) { resolve(); return; }
+
+    const timeout = setTimeout(() => reject(new Error('WS open timeout')), 30_000);
+
+    sock.ev.on('connection.update', ({ connection }) => {
+      if (connection === 'open') { clearTimeout(timeout); resolve(); }
+      if (connection === 'close') { clearTimeout(timeout); reject(new Error('Connection closed before pairing')); }
+    });
+
+    // Also resolve after a safe delay if no update yet
+    setTimeout(() => { clearTimeout(timeout); resolve(); }, 5_000);
+  });
+
+  if (sock.authState.creds.registered) {
+    console.log('[WA] Already registered — no pairing needed');
+    return 'already-linked';
+  }
+
+  // Request pairing code — digits only, no + or spaces
+  const clean = phone.replace(/[^0-9]/g, '');
+  console.log(`[WA] Requesting pairing code for ${clean}`);
+  const code = await sock.requestPairingCode(clean);
+  pairingCode   = code;
+  pairingExpiry = Date.now() + 180_000; // 3 minutes
+  console.log(`[WA] Pairing code: ${code} ✓`);
+  return code;
+}
+
 async function startPairLogin(phone) {
-  reset(); mode = 'pair'; linkedPhone = phone; targetPhone = phone;
-  try { return await _connectPair(phone); }
-  catch (e) { reset(); throw new Error(e.message || 'Pairing failed. Try again.'); }
+  wipeSession();
+  fullReset();
+  mode          = 'pair';
+  linkedPhone   = phone;
+  phoneForRetry = phone;
+
+  try {
+    const code = await _buildPair(phone);
+    return code;
+  } catch (err) {
+    console.error('[WA] Pair failed:', err.message);
+    fullReset();
+    throw new Error(err.message || 'Failed to get pairing code — try again');
+  }
 }
 
-async function disconnect() {
+// ─── Disconnect ───────────────────────────────────────────────
+async function disconnectBot() {
   linkedPhone = null;
-  reset();
+  wipeSession();
+  fullReset();
 }
 
-module.exports = { getStatus, getQRImage, startQRLogin, startPairLogin, disconnect };
+module.exports = { getStatus, getQR, startQRLogin, startPairLogin, disconnectBot };
