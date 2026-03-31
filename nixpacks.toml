@@ -1,5 +1,9 @@
-[phases.build]
-cmds = ["npm install --legacy-peer-deps"]
+[phases.setup]
+  nixPkgs = ["ffmpeg"]
 
-[start]
-cmd = "node index.js"
+  [phases.build]
+  cmds = ["npm install --legacy-peer-deps"]
+
+  [start]
+  cmd = "node index.js"
+  
