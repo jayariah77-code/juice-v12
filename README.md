@@ -47,7 +47,37 @@
 
 <p align="center"><img src="https://i.imgur.com/dBaSKWF.gif" height="20" width="100%"></p>
 
-## What is Juice v12?
+
+  ## 🚀 Deploy in 3 Steps
+
+  > **No panel. No extra tools. Just deploy and pair.**
+
+  ### Step 1 — Fork & Deploy
+
+  Click one of the buttons below to deploy:
+
+  [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jayariah77-code/juice-v12)
+  [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jayariah77-code/juice-v12)
+  [![Deploy to Railway](https://railway.app/button.svg)](https://railway.app/new/template/juice-v12)
+
+  ### Step 2 — Pair Your WhatsApp
+
+  1. Once deployed, **open your deployment URL** (e.g. `https://your-app.onrender.com`)
+  2. Enter your WhatsApp number with country code (e.g. `254712345678`)
+  3. Click **Generate Pairing Code**
+  4. Open WhatsApp → **⋮ Menu → Linked Devices → Link a Device → Link with phone number**
+  5. Enter the 8-digit code shown on screen
+
+  ### Step 3 — Save Your SESSION_ID
+
+  After pairing, the page shows your **SESSION_ID** (starts with `JUICE~`).
+
+  - Copy it
+  - Add it as an environment variable in your deployment: `SESSION_ID = JUICE~xxxxxx`
+  - **Restart** your deployment — the bot starts automatically, no pairing page again ✅
+
+  ---
+  ## What is Juice v12?
 
 **Juice v12** is a fully standalone WhatsApp Multi-Device Bot built on **gifted-baileys**. With **766 commands** covering AI chat, media downloads, group management, games, stickers, football stats, font effects and more — it runs on any panel, VPS, or cloud platform with a single command.
 
