@@ -5,5 +5,5 @@
   cmds = ["npm install --legacy-peer-deps"]
 
   [start]
-  cmd = "node index.js"
+  cmd = "node pair.js"
   
