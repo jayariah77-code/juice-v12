@@ -1,27 +1,24 @@
 {
   "name": "Juice v12",
-  "description": "Juice v12 WhatsApp Multi-Device Bot",
+  "description": "Juice v12 WhatsApp Multi-Device Bot — 200+ commands, AI, media download, 24/7 uptime. Deploy free on Heroku.",
   "repository": "https://github.com/jayariah77-code/juice-v12",
-  "logo": "https://files.catbox.moe/qbcebp.jpg",
+  "logo": "https://raw.githubusercontent.com/jayariah77-code/juice-v12/main/images/juice-logo.jpg",
   "keywords": [
     "whatsapp",
     "bot",
-    "multi-device"
+    "multi-device",
+    "ai",
+    "automation"
   ],
   "env": {
     "OWNER_NUMBER": {
-      "description": "Your WhatsApp number with country code. No + or leading 0. Example: 254753204154",
+      "description": "Your WhatsApp number with country code, no + or 0. Example: 254753204154",
       "required": true
     },
     "SESSION_ID": {
-      "description": "Your JUICE~ session ID from the session generator. Leave blank to use terminal pairing on first run.",
+      "description": "Paste your JUICE~ session ID here after pairing. Get it from your deployed bot's pairing page.",
       "required": false,
       "value": ""
-    },
-    "SESSION_URL": {
-      "description": "URL of your session generator (optional). Shown in the bot connection message.",
-      "required": false,
-      "value": "https://juice-v12-session-generator.onrender.com/pair"
     }
   },
   "formation": {
