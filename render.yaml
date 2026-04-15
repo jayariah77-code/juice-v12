@@ -1,9 +1,10 @@
 services:
     - type: web
-      name: juice-v12
+      name: juice-v12-session-generator
       runtime: node
       buildCommand: npm install --legacy-peer-deps
       startCommand: node pair.js
+      healthCheckPath: /health
       envVars:
         - key: OWNER_NUMBER
           value: 254753204154
