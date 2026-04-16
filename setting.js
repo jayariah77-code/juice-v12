@@ -2,7 +2,7 @@
 
 /*
 🔗 Juice v12 Bot System
-by Juice v12 • 2024 - 2026
+by Ariah • 2024 - 2026
 
 >> Contact Links:
 ・WhatsApp : wa.me/254753204154
@@ -17,10 +17,10 @@ or removal of credits is strictly prohibited.
 //━━━━━━━━━━━━━━━━━━━━━━━━//
 // Owner Setting - DO NOT MODIFY
 global.owner = ["254753204154",]
-global.ownername = "Juice v12"
+global.ownername = "Ariah"
 global._protectedOwner = "254753204154"
 global._protectedBrand = "Juice v12"
-global._protectedAuthor = "Juice v12"
+global._protectedAuthor = "Ariah"
 //━━━━━━━━━━━━━━━━━━━━━━━━//
 // Bot Setting
 global.botname = "Juice v12"
@@ -76,7 +76,7 @@ global.ownerFontMode = 'off' // Set via .setfont [name], disable via .fontoff
 //━━━━━━━━━━━━━━━━━━━━━━━━//
 // Sticker Marker
 global.packname = "Juice v12"
-global.author = "© Juice v12"
+global.author = "© Ariah"
 //━━━━━━━━━━━━━━━━━━━━━━━━//
 // Social Links
 global.telegram = "https://t.me/jayariah77-code"
