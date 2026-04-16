@@ -17,7 +17,16 @@
 
 <br/>
 
-<p align="center"><i>"Speed. Power. Intelligence — all in one bot."</i></p>
+<p align="center">
+    <video src="https://raw.githubusercontent.com/jayariah77-code/juice-v12/main/images/juice-preview.mp4"
+      width="700" controls muted loop>
+      <a href="https://raw.githubusercontent.com/jayariah77-code/juice-v12/main/images/juice-preview.mp4">
+        ▶ Watch Juice v12 Bot Demo
+      </a>
+    </video>
+  </p>
+
+  <p align="center"><i>"Speed. Power. Intelligence — all in one bot."</i></p>
 
 <br/>
 
