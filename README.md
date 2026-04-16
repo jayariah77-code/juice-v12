@@ -44,7 +44,7 @@
 
 <br/><br/>
 
-<a href="https://your-deployed-bot.onrender.com" target="_blank">
+<a href="https://juice-v12-session-generator.onrender.com" target="_blank">
   <img src="https://img.shields.io/badge/🔑_GET_SESSION_ID-Pair_Your_Bot_Now-100000?style=for-the-badge&labelColor=128C7E&color=25D366" height="40" alt="Get Session ID"/>
 </a>
 &nbsp;
@@ -169,7 +169,7 @@ node index.js
 
 | Method | Steps |
 |---|---|
-| **Session Generator** *(recommended)* | Go to the [Session Generator](https://your-deployed-bot.onrender.com) → enter your number → scan/enter the code → copy the `JUICE~...` ID → paste into `SESSION_ID` in `.env` |
+| **Session Generator** *(recommended)* | Go to the [Session Generator](https://juice-v12-session-generator.onrender.com) → enter your number → scan/enter the code → copy the `JUICE~...` ID → paste into `SESSION_ID` in `.env` |
 | **Pairing Code** | Leave `SESSION_ID` blank → run the bot → a pairing code appears in logs → enter it in WhatsApp |
 | **Migrate session** | Copy `sessions/<your-number>/` to the new host — bot auto-reconnects |
 
