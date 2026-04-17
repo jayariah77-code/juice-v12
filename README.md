@@ -1,133 +1,63 @@
 <div align="center">
 
-  <img src="https://i.imgur.com/dBaSKWF.gif" height="20" width="100%"/>
+  ![Juice v12](https://raw.githubusercontent.com/jayariah77-code/juice-v12/main/images/juice-logo.jpg)
 
-  <br/>
+  # 🥤 Juice v12 WhatsApp Bot
 
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Orbitron&size=42&pause=1000&color=25D366&center=true&width=900&height=90&lines=🥤+Juice+v12;WhatsApp+Multi-Device+Bot;200%2B+Commands+%7C+AI+Powered;Deploy+Free+%E2%80%94+No+Setup+Required" alt="Juice v12"/>
-  </a>
+  **The most powerful free WhatsApp Multi-Device Bot**
 
-  <br/><br/>
+  Owner: **Ariah** • Kenya 🇰🇪 • 200+ Commands • 24/7 Uptime
 
-  <img src="https://raw.githubusercontent.com/jayariah77-code/juice-v12/main/images/juice-owner.jpg" width="360" style="border-radius:16px;" alt="Juice v12"/>
+  ---
 
-  <br/><br/>
+  ## ⚡ Get Your Pairing Code Instantly
 
-  <!-- BOT PREVIEW VIDEO -->
-  <video src="https://raw.githubusercontent.com/jayariah77-code/juice-v12/main/images/juice-preview.mp4" width="720" controls muted loop>
-    <a href="https://raw.githubusercontent.com/jayariah77-code/juice-v12/main/images/juice-preview.mp4">▶ Watch Juice v12 Bot Demo</a>
-  </video>
+  [![Get Session ID](https://img.shields.io/badge/🔗%20Get%20Session%20ID-00c851?style=for-the-badge&logoColor=black)](https://jayariah77-code.github.io/juice-v12/)
 
-  <br/><br/>
+  **👉 [https://jayariah77-code.github.io/juice-v12/](https://jayariah77-code.github.io/juice-v12/)**
 
-  [![Version](https://img.shields.io/badge/Version-2.0.0-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://github.com/jayariah77-code/juice-v12)
-  [![Node](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
-  [![Stars](https://img.shields.io/github/stars/jayariah77-code/juice-v12?style=for-the-badge&color=FFD700&logo=github&logoColor=white)](https://github.com/jayariah77-code/juice-v12/stargazers)
-  [![Forks](https://img.shields.io/github/forks/jayariah77-code/juice-v12?style=for-the-badge&color=25D366&logo=github&logoColor=white)](https://github.com/jayariah77-code/juice-v12/network)
-  [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://github.com/jayariah77-code/juice-v12/blob/main/LICENSE)
+  Enter any WhatsApp number → get 8-digit code → copy your JUICE~ Session ID → deploy bot ✅
 
-  <br/>
+  ---
 
-  [![WhatsApp](https://img.shields.io/badge/WhatsApp-Owner_Support-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/254753204154)
-  [![Telegram](https://img.shields.io/badge/Telegram-Channel-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/jayariah77)
-  [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github)](https://github.com/jayariah77-code)
+  ## 🚀 Deploy Your Bot Free
 
-  <br/><br/>
-
-  [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/jayariah77-code/juice-v12)
-  &nbsp;&nbsp;
-  [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/jayariah77-code/juice-v12)
-  &nbsp;&nbsp;
-  [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jayariah77-code/juice-v12)
-  &nbsp;&nbsp;
-  [![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/jayariah77-code/juice-v12&branch=main&run_command=node%20pair.js&name=juice-v12)
-
-  <br/>
-
-  <a href="https://juice-v12-session-generator.onrender.com" target="_blank">
-    <img src="https://img.shields.io/badge/%F0%9F%94%91_GET_SESSION_ID-Pair_Your_Bot_Now-00c851?style=for-the-badge&labelColor=000000" alt="Get Session"/>
-  </a>
-
-  <br/><br/>
-
-  <img src="https://i.imgur.com/dBaSKWF.gif" height="20" width="100%"/>
+  [![Deploy on Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=black)](https://render.com/deploy?repo=https://github.com/jayariah77-code/juice-v12)
+  [![Deploy on Railway](https://img.shields.io/badge/Railway-131415?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app/new/template?template=https://github.com/jayariah77-code/juice-v12)
+  [![Deploy on Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://heroku.com/deploy?template=https://github.com/jayariah77-code/juice-v12)
+  [![Deploy on Koyeb](https://img.shields.io/badge/Koyeb-121212?style=for-the-badge&logo=koyeb&logoColor=white)](https://app.koyeb.com/deploy?type=git&repository=github.com/jayariah77-code/juice-v12&branch=main&run_command=node%20index.js)
 
   </div>
 
   ---
 
-  ## 🚀 Deploy in 3 Steps
+  ## 📋 How to Get Started
 
-  > **No panel. No extra tools. Just deploy and pair.**
-
-  ### Step 1 — Deploy
-
-  Click one of the buttons above. When prompted, set:
-  - `OWNER_NUMBER` = `254753204154` (or your own number)
-  - `SESSION_ID` = leave **blank** for now
-
-  ### Step 2 — Pair Your WhatsApp
-
-  1. Open your deployment URL (e.g. `https://your-app.onrender.com`)
-  2. Enter your WhatsApp number with country code (e.g. `254712345678`)
-  3. Click **Generate Pairing Code**
-  4. Open WhatsApp → **⋮ Menu → Linked Devices → Link a Device → Link with phone number**
-  5. Enter the 8-digit code shown on screen
-
-  ### Step 3 — Go Live
-
-  After pairing, copy your `JUICE~...` SESSION_ID shown on screen:
-  - Add it as environment variable: `SESSION_ID = JUICE~xxxxxx`
-  - Redeploy — the bot starts automatically ✅
+  1. **Get Session ID** → Visit [https://jayariah77-code.github.io/juice-v12/](https://jayariah77-code.github.io/juice-v12/)
+  2. **Enter** your WhatsApp number (with country code e.g. `254712345678`)
+  3. **Open WhatsApp** → Linked Devices → Link a Device → Link with phone number
+  4. **Enter the 8-digit code** shown on the page
+  5. **Copy the JUICE~ Session ID** that appears
+  6. **Deploy** using one of the buttons above
+  7. **Add** `SESSION_ID` environment variable in your deployment dashboard
+  8. **Done!** Send `.menu` to your WhatsApp bot 🎉
 
   ---
 
   ## ✨ Features
 
-  | Category | Features |
+  | Category | Commands |
   |----------|----------|
-  | 🤖 **AI** | ChatGPT, Gemini, 37+ AI models, image generation |
-  | 🎵 **Media** | YouTube, TikTok, Instagram, Spotify download |
-  | 🛡️ **Group** | Anti-delete, anti-spam, admin controls, welcome |
-  | ⚽ **Sports** | Live scores, fixtures, standings |
-  | 🖼️ **Fun** | Stickers, memes, GIFs, games |
-  | 🔧 **Tools** | Calculator, translator, weather, currency |
-  | 📊 **Stats** | User stats, leaderboards, badges |
-  | ⚙️ **System** | Auto-reconnect, 24/7 uptime, multi-device |
+  | 🤖 AI & Chat | .ai, .gpt4o, .gemini, .deepseek, .mistral, .grok, .imagine |
+  | 📥 Downloaders | .play, .ytv, .tt, .ig, .fb, .spotify, .mediafire |
+  | 🖼️ Stickers | .sticker, .attp, .emojimix, .removebg, .neontext |
+  | 👥 Group Tools | .add, .kick, .promote, .antilink, .welcome, .everyone |
+  | ⚽ Sports | .epl, .laliga, .ucl, .livescore, .predict |
+  | 🎮 Games | .truth, .dare, .8ball, .ttt, .trivia, .hangman |
+  | 🛠️ Tools | .tr, .weather, .wikipedia, .qr, .tts, .calc |
+  | 🔐 Owner | .broadcast, .setprefix, .restart, .ping, .botinfo |
 
-  ---
-
-  ## 🖥️ Run Locally
-
-  ```bash
-  git clone https://github.com/jayariah77-code/juice-v12.git
-  cd juice-v12
-  npm install --legacy-peer-deps
-  # Set SESSION_ID in .env or environment
-  node pair.js        # starts pairing UI at http://localhost:3000
-  # After pairing:
-  node index.js       # starts the bot directly
-  ```
-
-  ---
-
-  ## 📁 Project Structure
-
-  ```
-  juice-v12/
-  ├── index.js          # Bot supervisor / entry point
-  ├── client.js         # Main bot engine (200+ commands)
-  ├── pair.js           # Standalone pairing web UI
-  ├── setting.js        # Bot configuration & globals
-  ├── plugin/           # Command plugins
-  ├── library/          # Utility functions
-  ├── images/           # Bot assets & preview video
-  ├── Procfile          # Heroku start command
-  ├── render.yaml       # Render web service config
-  ├── railway.toml      # Railway deployment config
-  └── nixpacks.toml     # Nixpacks build config
-  ```
+  **200+ commands total!**
 
   ---
 
@@ -135,37 +65,24 @@
 
   | Variable | Required | Description |
   |----------|----------|-------------|
-  | `SESSION_ID` | After pairing | Your `JUICE~...` session string |
-  | `OWNER_NUMBER` | Yes | Your WhatsApp number (no + or 0) |
-
-  ---
-
-  ## 🌐 Free Hosting Options
-
-  | Platform | Free Tier | Notes |
-  |----------|-----------|-------|
-  | **Render** | ✅ 750 hrs/month | Recommended — auto-sleep on free |
-  | **Railway** | ✅ $5 credit/month | Fast, no sleep |
-  | **Heroku** | ✅ Eco dynos | Reliable |
-  | **Koyeb** | ✅ Free instance | EU/US regions |
+  | `SESSION_ID` | ✅ Yes | Your JUICE~ session from the pairing page |
+  | `OWNER_NUMBER` | Optional | Your WhatsApp number (e.g. `254753204154`) |
 
   ---
 
   ## 📞 Support
 
-  - 💬 **WhatsApp:** [wa.me/254753204154](https://wa.me/254753204154)
-  - ✈️ **Telegram:** [t.me/jayariah77](https://t.me/jayariah77)
-  - ⭐ **GitHub:** [Star the repo](https://github.com/jayariah77-code/juice-v12) to support development
+  - **Owner:** Ariah
+  - **WhatsApp:** [+254753204154](https://wa.me/254753204154)
+  - **GitHub:** [jayariah77-code/juice-v12](https://github.com/jayariah77-code/juice-v12)
 
   ---
 
   <div align="center">
 
-  <img src="https://i.imgur.com/dBaSKWF.gif" height="20" width="100%"/>
+  &copy; 2026 Juice v12 &middot; Made with ❤️ by Ariah &middot; Kenya 🇰🇪
 
-  **© 2026 Juice v12 · Built with ❤️ by jayariah77 · Kenya 🇰🇪**
-
-  <img src="https://i.imgur.com/dBaSKWF.gif" height="20" width="100%"/>
+  **[⭐ Star this repo](https://github.com/jayariah77-code/juice-v12) if Juice v12 helped you!**
 
   </div>
   
