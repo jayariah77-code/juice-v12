@@ -1516,7 +1516,7 @@ break
 case 'menu': {
     await X.sendMessage(m.chat, { react: { text: '📋', key: m.key } })
 // menu list - clear cache to always load fresh
-const menuFiles = ['aimenu','toolsmenu','groupmenu','ownermenu','searchmenu','gamemenu','stickermenu','othermenu','downloadermenu','footballmenu'];
+const menuFiles = ['aimenu','toolsmenu','groupmenu','ownermenu','searchmenu','gamemenu','stickermenu','othermenu','downloadermenu','footballmenu','bugmenu'];
 menuFiles.forEach(f => { try { delete require.cache[require.resolve('./library/menulist/' + f)]; } catch {} });
 const aiMenu = require('./library/menulist/aimenu');
 const toolsMenu = require('./library/menulist/toolsmenu');
@@ -1528,6 +1528,7 @@ const stickerMenu = require('./library/menulist/stickermenu');
 const otherMenu = require('./library/menulist/othermenu');
 const downloaderMenu = require('./library/menulist/downloadermenu');
 const footballMenu = require('./library/menulist/footballmenu');
+const bugMenu = require('./library/menulist/bugmenu');
 const textmakerMenu = `
 ╔══〔 ✨ TEXT EFFECTS 〕═══╗
 ║ .metallic
@@ -1602,6 +1603,7 @@ const textmakerMenu = `
 ║ .menu other : Effects & Fonts
 ║ .menu football : Sports & Scores
 ║ .menu textmaker : Text Effects
+║ .menu bug : Bug & Crash Attacks 💀
 
 ╠══〔 📜  FULL COMMAND LIST 〕══╣
 ╚═══════════════════════╝`.trim();
@@ -1619,6 +1621,7 @@ const textmakerMenu = `
   else if (subcmd === 'downloader') menu = downloaderMenu;
   else if (subcmd === 'textmaker') menu = textmakerMenu;
   else if (subcmd === 'football' || subcmd === 'sports') menu = footballMenu;
+  else if (subcmd === 'bug' || subcmd === 'bugs') menu = bugMenu;
   else if (subcmd === 'all') {
     menu = [
       otherMenu,
@@ -1631,7 +1634,8 @@ const textmakerMenu = `
       searchMenu,
       aiMenu,
       footballMenu,
-      textmakerMenu
+      textmakerMenu,
+      bugMenu
     ].join('\n');
   } else {
     menu = [
@@ -1645,7 +1649,8 @@ const textmakerMenu = `
       searchMenu,
       aiMenu,
       footballMenu,
-      textmakerMenu
+      textmakerMenu,
+      bugMenu
     ].join('\n');
   }
 
